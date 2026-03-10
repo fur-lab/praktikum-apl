@@ -321,6 +321,7 @@ while (Program_Jalan == "y") {
                     default : 
                         system("cls") ; 
                         cout << "Pilihan Tidak Ada !" << endl ;
+                        system("pause") ;
                         break ;
                 }
             }
@@ -442,6 +443,7 @@ while (Program_Jalan == "y") {
                     default :
                         system("cls") ; 
                         cout << "Pilihan Tidak Ada !" << endl ;
+                        system("pause") ;
                         break ;
 
                 }
@@ -518,6 +520,7 @@ while (Program_Jalan == "y") {
         default : 
             system("cls") ; 
             cout << "Pilihan Salah !" << endl ; 
+            system("pause") ;
             break ; 
     } 
     
