@@ -58,7 +58,7 @@ Bio_Kos Bk [MAX_PENGHUNI_KOS] ;
 
 ///// FUNGSI ADMIN -----------------------------
 
-void Tambah_Penghuni (Bio_Kos BK[], int Panjang) {
+void Tambah_Penghuni (Bio_Kos BK[], int &Panjang) {
      // C
     system("cls") ;
     if (Panjang < MAX_PENGHUNI_KOS) {
@@ -197,7 +197,7 @@ void Update_Penghuni (Bio_Kos BK[], int Panjang) {
     
 }
 
-void Hapus_Penghuni (Bio_Kos BK[], int Panjang) {
+void Hapus_Penghuni (Bio_Kos BK[], int &Panjang) {
     // D
     system("cls") ; 
     if (Panjang == 0) {
@@ -334,7 +334,7 @@ void Login_Admin (string Admin, string Pw_Admin) {
 }
         
     if (Kesempatan == 0) {
-        return 0 ;
+        return;
     }
 
     while (Menu_Admin) {
@@ -393,7 +393,7 @@ void Login_Admin (string Admin, string Pw_Admin) {
 void Login_User (Bio_Kos Bk[], int Panjang, int &Index_Login) {
     system("cls") ; 
 
-    int Index_Login = -1 ;
+    Index_Login = -1 ;
 
     while (Kesempatan > 0) {
         cout << "ID : " << endl ;
@@ -421,7 +421,7 @@ void Login_User (Bio_Kos Bk[], int Panjang, int &Index_Login) {
 
         if (Kesempatan == 0) {
             cout << "Kesempatan habis ! " << endl ;
-            return 0 ;
+            return;
         }
     }
 
@@ -467,7 +467,7 @@ void Login_User (Bio_Kos Bk[], int Panjang, int &Index_Login) {
     
 }
 
-void Registrasi (Bio_Kos Bk[], int Panjang) {
+void Registrasi (Bio_Kos Bk[], int &Panjang) {
     // Registrasi
             system("cls") ; 
             bool ID_Sama = false ;
@@ -564,7 +564,8 @@ while (Program_Jalan == "y") {
             break ;
 
         case 2 :          // User    
-            Login_User(Bk, Panjang);
+            int Index_Login;
+            Login_User(Bk, Panjang, Index_Login);
             break ;
 
         case 3 :
