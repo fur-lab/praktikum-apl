@@ -24,6 +24,9 @@ bool ID_Ditemukan_U = false ;
 int ID_Cari_D ;
 bool ID_Ditemukan_D = false ;
 
+bool ID_Sama = false ;
+bool Kamar_Terisi_Regis = false ;
+
 int Input_ID_User ;
 string Input_Pw_User ;
 int Pilihan_User ;
@@ -58,9 +61,11 @@ Bio_Kos Bk [MAX_PENGHUNI_KOS] ;
 
 ///// FUNGSI ADMIN -----------------------------
 
-void Tambah_Penghuni (Bio_Kos BK[], int &Panjang) {
+void Tambah_Penghuni (Bio_Kos Bk[], int &Panjang) {
      // C
     system("cls") ;
+    Kamar_Terisi_C = false ;
+
     if (Panjang < MAX_PENGHUNI_KOS) {
         cout << "Masukan ID penghuni baru : " ;
         cin >> Bk[Panjang].ID ;
@@ -84,6 +89,7 @@ void Tambah_Penghuni (Bio_Kos BK[], int &Panjang) {
 
         if (Kamar_Terisi_C) {
             cout << "Kamar sudah terisi " << endl ;
+            system("pause") ;
 
         } else {
         cout << "Masukan Status Sewa penghuni baru (Aktif / Tidak Aktif): " ;
@@ -103,12 +109,13 @@ void Tambah_Penghuni (Bio_Kos BK[], int &Panjang) {
 
     } else {
         cout << "Kamar penuh !" << endl ;
+        system("pause") ;
     }
                         
 
 }
 
-void Data_Penghuni (Bio_Kos BK[], int Panjang) {
+void Data_Penghuni (Bio_Kos Bk[], int Panjang) {
     // R
     system("cls") ; 
     if (Panjang == 0) {
@@ -135,9 +142,12 @@ void Data_Penghuni (Bio_Kos BK[], int Panjang) {
     
 }
 
-void Update_Penghuni (Bio_Kos BK[], int Panjang) {
+void Update_Penghuni (Bio_Kos Bk[], int Panjang) {
      // U
     system("cls") ; 
+    Kamar_Terisi_U = false ;
+    ID_Ditemukan_U = false ; 
+
     if (Panjang == 0) {
         cout << "Belum ada data Penghuni untuk diubah" << endl ;
 
@@ -167,8 +177,8 @@ void Update_Penghuni (Bio_Kos BK[], int Panjang) {
                 cout << "Masukan Nomor Kamar baru (1 - 5): " ;
                 cin >> Bk[i].No_Kamar ;
 
-                for (int i = 0 ; i < Panjang ; i++) {
-                if (Bk[i].Tipe_Kamar == Bk[i].Tipe_Kamar && Bk[i].No_Kamar == Bk[i].No_Kamar) {
+                for (int j = 0 ; j < Panjang ; j++) {
+                if (j != i && Bk[j].Tipe_Kamar == Bk[i].Tipe_Kamar && Bk[j].No_Kamar == Bk[i].No_Kamar) {
                     Kamar_Terisi_U = true ;
                     break ;
                 }
@@ -197,9 +207,11 @@ void Update_Penghuni (Bio_Kos BK[], int Panjang) {
     
 }
 
-void Hapus_Penghuni (Bio_Kos BK[], int &Panjang) {
+void Hapus_Penghuni (Bio_Kos Bk[], int &Panjang) {
     // D
     system("cls") ; 
+    ID_Ditemukan_D = false ;
+
     if (Panjang == 0) {
         cout << "Belum ada data Penghuni untuk dihapus" << endl ;
 
@@ -270,6 +282,7 @@ void Data_User (int Index_Login) {
 void Edit_Bio_User (int Index_Login) {
     // UPDATE
     system("cls") ;
+    Kamar_Terisi_User = false ;
     cout << "=================================== " << endl ;
     cout << "        Edit Data Anda" << endl ;
     cout << "=================================== " << endl ;
@@ -287,16 +300,16 @@ void Edit_Bio_User (int Index_Login) {
     cin >> Bk[Index_Login].No_Kamar ;
 
     for (int i = 0 ; i < Panjang ; i++) {
-        if (Bk[Index_Login].No_Kamar == Bk[i].No_Kamar &&Bk[Index_Login].Tipe_Kamar == Bk[i].Tipe_Kamar ) {
+        if (i != Index_Login && Bk[Index_Login].No_Kamar == Bk[i].No_Kamar &&Bk[Index_Login].Tipe_Kamar == Bk[i].Tipe_Kamar ) {
             Kamar_Terisi_User = true ;
-            break ;
+            break;
         }
     }
 
     if (Kamar_Terisi_User) {
         cout << "Kamar sudah ditempati !" << endl ;
         system("pause") ;
-        // break ;
+        return;
 
     }
 
@@ -314,6 +327,8 @@ void Edit_Bio_User (int Index_Login) {
 
 void Login_Admin (string Admin, string Pw_Admin) {
     system("cls") ;                                // ADMIN
+    Kesempatan = 3 ;
+
     while (Kesempatan > 0) {
         cout << "Nama Admin : " << endl ;
         cin >> Input_Admin ;
@@ -334,6 +349,8 @@ void Login_Admin (string Admin, string Pw_Admin) {
 }
         
     if (Kesempatan == 0) {
+        cout << "Kesempatan habis !" << endl ;
+        system("pause") ;
         return;
     }
 
@@ -392,7 +409,7 @@ void Login_Admin (string Admin, string Pw_Admin) {
 
 void Login_User (Bio_Kos Bk[], int Panjang, int &Index_Login) {
     system("cls") ; 
-
+    Kesempatan = 3 ;
     Index_Login = -1 ;
 
     while (Kesempatan > 0) {
@@ -421,6 +438,7 @@ void Login_User (Bio_Kos Bk[], int Panjang, int &Index_Login) {
 
         if (Kesempatan == 0) {
             cout << "Kesempatan habis ! " << endl ;
+            system("pause") ;
             return;
         }
     }
@@ -470,7 +488,8 @@ void Login_User (Bio_Kos Bk[], int Panjang, int &Index_Login) {
 void Registrasi (Bio_Kos Bk[], int &Panjang) {
     // Registrasi
             system("cls") ; 
-            bool ID_Sama = false ;
+            ID_Sama = false ;
+            Kamar_Terisi_Regis = false ;
 
             if (Panjang >= MAX_PENGHUNI_KOS) {
                 cout << "Kos Sudah Penuh !" << endl ;
@@ -492,7 +511,7 @@ void Registrasi (Bio_Kos Bk[], int &Panjang) {
                 if (ID_Sama) {
                     cout << "ID sudah digunakan !" << endl ;
                     system("pause") ;
-                    // break ;
+                    return;
                 }
 
                 cout << "Nama : " ;
@@ -504,6 +523,20 @@ void Registrasi (Bio_Kos Bk[], int &Panjang) {
 
                 cout << "Nomor Kamar (1 - 5) : " ;
                 cin >> Bk[Panjang].No_Kamar ;
+
+                for (int i = 0 ; i < Panjang ; i++) {
+                if (Bk[i].No_Kamar == Bk[Panjang].No_Kamar &&Bk[i].Tipe_Kamar == Bk[Panjang].Tipe_Kamar ) {
+                    Kamar_Terisi_Regis = true ;
+                    break;
+                }
+            }
+
+            if (Kamar_Terisi_Regis) {
+                cout << "Kamar sudah ditempati !" << endl ;
+                system("pause") ;
+                return;
+
+            }
 
                 cout << "Tanggal Masuk : " ;
                 cin >> Bk[Panjang].Tanggal_Masuk.Hari ;
@@ -526,7 +559,11 @@ void Registrasi (Bio_Kos Bk[], int &Panjang) {
             system("pause") ;
     }
 
-    
+void Terima_Kasih() {
+    cout << "=================================== " << endl ;
+    cout << "          Terima Kasih !" << endl ;
+    cout << "===================================  " << endl ;
+}
 
 
 
@@ -586,7 +623,7 @@ while (Program_Jalan == "y") {
     
 } 
 
-    cout << "Terima kasih sudah menggunakan program ini !" << endl ;
+    Terima_Kasih() ;
     return 0 ;
     }
 
