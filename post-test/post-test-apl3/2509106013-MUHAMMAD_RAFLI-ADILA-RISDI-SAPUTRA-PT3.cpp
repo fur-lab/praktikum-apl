@@ -262,24 +262,24 @@ void Hapus_Penghuni (Bio_Kos Bk[], int &Panjang) {
 
 ///// FUNGSI USER -----------------------------
 
-void Data_User (Bio_Kos *ptr_Penghuni) {
+void Data_User (int Index_Login) {
     // READ
         system("cls") ; 
         cout << "=================================== " << endl ;
         cout << "           Data Anda" << endl ;
         cout << "=================================== " << endl ;
 
-        cout << " ID : " << ptr_Penghuni->ID << endl ;
-        cout << " Nama : " << ptr_Penghuni->Nama << endl ;
-        cout << " Tipe Kamar : " << ptr_Penghuni->Tipe_Kamar << endl ;
-        cout << " Nomor Kamar : " << ptr_Penghuni->No_Kamar << endl ;
-        cout << " Status : " << ptr_Penghuni->Status_Sewa << endl ;
+        cout << " ID : " << Bk[Index_Login].ID << endl ;
+        cout << " Nama : " << Bk[Index_Login].Nama << endl ;
+        cout << " Tipe Kamar : " << Bk[Index_Login].Tipe_Kamar << endl ;
+        cout << " Nomor Kamar : " << Bk[Index_Login].No_Kamar << endl ;
+        cout << " Status : " << Bk[Index_Login].Status_Sewa << endl ;
 
         system("pause") ;
     
 }
 
-void Edit_Bio_User (Bio_Kos *ptr_Penghuni) {
+void Edit_Bio_User (int Index_Login) {
     // UPDATE
     system("cls") ;
     Kamar_Terisi_User = false ;
@@ -291,16 +291,16 @@ void Edit_Bio_User (Bio_Kos *ptr_Penghuni) {
 
     cout << "Nama baru : " << endl ;
     cin.ignore() ;
-    getline(cin, ptr_Penghuni->Nama) ;
+    getline(cin, Bk[Index_Login].Nama) ;
 
     cout << "Tipe Kamar Baru (A / B) : " ;
-    cin >> ptr_Penghuni->Tipe_Kamar ;
+    cin >> Bk[Index_Login].Tipe_Kamar ;
 
     cout << "Nomor Kamar Baru (1 - 5): " ;
-    cin >> ptr_Penghuni->No_Kamar ;
+    cin >> Bk[Index_Login].No_Kamar ;
 
     for (int i = 0 ; i < Panjang ; i++) {
-        if (&Bk[i] != ptr_Penghuni && Bk[i].No_Kamar == ptr_Penghuni->No_Kamar  &&  Bk[i].Tipe_Kamar == ptr_Penghuni->Tipe_Kamar ) {
+        if (i != Index_Login && Bk[Index_Login].No_Kamar == Bk[i].No_Kamar &&Bk[Index_Login].Tipe_Kamar == Bk[i].Tipe_Kamar ) {
             Kamar_Terisi_User = true ;
             break;
         }
@@ -314,7 +314,7 @@ void Edit_Bio_User (Bio_Kos *ptr_Penghuni) {
     }
 
     cout << "Password baru : " ;
-    cin >> ptr_Penghuni->Password_User ;
+    cin >> Bk[Index_Login].Password_User ;
 
     cout << "Data Berhasil Diubah !" << endl ;
 
@@ -460,11 +460,11 @@ void Login_User (Bio_Kos Bk[], int Panjang, int &Index_Login) {
 
         switch (Pilihan_User) {
             case 1 : // READ
-                Data_User(&Bk[Index_Login]);
+                Data_User(Index_Login);
                 break ;
 
             case 2 : // UPDATE
-                Edit_Bio_User(&Bk[Index_Login]);
+                Edit_Bio_User(Index_Login);
                 break ;
 
 
@@ -570,7 +570,7 @@ void Terima_Kasih() {
 
 int main () {
 
-    Bk[0] = {100, "Putra", "A", 1, "Aktif", {10, 7, 2022}, "Apaajah"} ;
+    Bk[0] = {100, "Putra", "A", 1, "Aktif", {10, 7, 2022}, "Apa ajah"} ;
     Bk[1] = {101, "Ali", "B", 2, "Aktif", {4, 10, 2023}, "mainyukkk"} ;
     Bk[2] = {102, "Opi", "A", 3, "Aktif", {9, 8, 2023}, "23-08-09"} ;
     Bk[3] = {103, "Rudi", "B", 3, "Aktif", {11, 8, 2023}, "rudipakaii"} ;
