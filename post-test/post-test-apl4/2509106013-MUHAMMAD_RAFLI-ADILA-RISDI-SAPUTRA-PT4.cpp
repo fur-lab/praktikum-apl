@@ -11,36 +11,18 @@ string Program_Jalan = "y" ;
 bool Menu_Admin = false ;
 bool Menu_User = false ;
 
-
 int Pilihan_Login ;
 int Pilihan_Admin ;
-
-bool Kamar_Terisi_C = false ;
-
-bool Kamar_Terisi_U = false ;
-int ID_Cari_U ;
-bool ID_Ditemukan_U = false ;
-
-int ID_Cari_D ;
-bool ID_Ditemukan_D = false ;
-
-bool ID_Sama = false ;
-bool Kamar_Terisi_Regis = false ;
 
 int Input_ID_User ;
 string Input_Pw_User ;
 int Pilihan_User ;
-
-
-bool Kamar_Terisi_User = false ;
-
 
 struct Tanggal_Mulai {
     int Hari ;
     int Bulan ; 
     int Tahun ;
 } ;
-
 
 struct Bio_Kos  {
     int ID  ;
@@ -57,14 +39,12 @@ struct Bio_Kos  {
 int Panjang = 0 ;
 Bio_Kos Bk [MAX_PENGHUNI_KOS] ;
 
-
-
 ///// FUNGSI ADMIN -----------------------------
 
 void Tambah_Penghuni (Bio_Kos Bk[], int &Panjang) {
      // C
     system("cls") ;
-    Kamar_Terisi_C = false ;
+    bool Kamar_Terisi_C = false ;
 
     if (Panjang < MAX_PENGHUNI_KOS) {
         cout << "Masukan ID penghuni baru : " ;
@@ -145,8 +125,9 @@ void Data_Penghuni (Bio_Kos Bk[], int Panjang) {
 void Update_Penghuni (Bio_Kos Bk[], int Panjang) {
      // U
     system("cls") ; 
-    Kamar_Terisi_U = false ;
-    ID_Ditemukan_U = false ; 
+    bool Kamar_Terisi_U = false ;
+    int ID_Cari_U ;
+    bool ID_Ditemukan_U = false ;
 
     if (Panjang == 0) {
         cout << "Belum ada data Penghuni untuk diubah" << endl ;
@@ -210,7 +191,8 @@ void Update_Penghuni (Bio_Kos Bk[], int Panjang) {
 void Hapus_Penghuni (Bio_Kos Bk[], int &Panjang) {
     // D
     system("cls") ; 
-    ID_Ditemukan_D = false ;
+    int ID_Cari_D ;
+    bool ID_Ditemukan_D = false ;
 
     if (Panjang == 0) {
         cout << "Belum ada data Penghuni untuk dihapus" << endl ;
@@ -282,7 +264,7 @@ void Data_User (Bio_Kos *ptr_Penghuni) {
 void Edit_Bio_User (Bio_Kos *ptr_Penghuni) {
     // UPDATE
     system("cls") ;
-    Kamar_Terisi_User = false ;
+    bool Kamar_Terisi_User = false ;
     cout << "=================================== " << endl ;
     cout << "        Edit Data Anda" << endl ;
     cout << "=================================== " << endl ;
@@ -488,8 +470,8 @@ void Login_User (Bio_Kos Bk[], int Panjang, int &Index_Login) {
 void Registrasi (Bio_Kos Bk[], int &Panjang) {
     // Registrasi
             system("cls") ; 
-            ID_Sama = false ;
-            Kamar_Terisi_Regis = false ;
+            bool ID_Sama = false ;
+            bool Kamar_Terisi_Regis = false ;
 
             if (Panjang >= MAX_PENGHUNI_KOS) {
                 cout << "Kos Sudah Penuh !" << endl ;
