@@ -447,14 +447,14 @@ int Cari_ID_Binary (Bio_Kos *Bk, int Panjang,  int Target) { // Binary search ca
         if (Bk[mid].ID == Target) {
             return mid ;
 
-    } else if (Bk[mid].ID < Target) {
-        high = mid - 1 ;
+        } else if (Bk[mid].ID < Target) {
+            high = mid - 1 ;
 
-    } else {
-        low = mid + 1 ;
+        } else {
+            low = mid + 1 ;
+            }
         }
-
-    }
+        
     return -1 ;
 }
 
@@ -465,26 +465,32 @@ void Menu_Cari_ID (Bio_Kos *Bk, int Panjang) {
     if (Panjang == 0) {
         cout << "Data masih kosong" ;
         system("pause") ;
+        return ;
     }
 
-    Merge_Sort(Bk, 0, Panjang - 1) ;
+    Bio_Kos Bk_Temp [MAX_PENGHUNI_KOS] ;
+    for (int i = 0 ; i < Panjang ; i++) {
+        Bk_Temp[i] = Bk[i] ;
+    }
+
+    Merge_Sort(Bk_Temp, 0, Panjang - 1) ;
 
     cout << "=================================== " << endl ;
     cout << "            CARI ID        " << endl ;
     cout << "=================================== " << endl ;
     cout << "Masukan ID yang ingin dicari : " ; cin >> Target ;
     
-    int Hasil = Cari_ID_Binary(Bk, Panjang, Target) ;
+    int Hasil = Cari_ID_Binary(Bk_Temp, Panjang, Target) ;
 
     if (Hasil != -1) {
         system("cls") ;
         cout << "ID ditemukan !" << endl ;
         cout << "------------------------------" << endl ;
-        cout << " ID : " << Bk[Hasil].ID << endl ;
-        cout << " Nama : " << Bk[Hasil].Nama << endl ;
-        cout << " Tipe Kamar : " <<Bk[Hasil].Tipe_Kamar << endl ;
-        cout << " Nomor Kamar : " << Bk[Hasil].No_Kamar << endl ;
-        cout << " Status : " << Bk[Hasil].Status_Sewa << endl ;
+        cout << " ID : " << Bk_Temp[Hasil].ID << endl ;
+        cout << " Nama : " << Bk_Temp[Hasil].Nama << endl ;
+        cout << " Tipe Kamar : " <<Bk_Temp[Hasil].Tipe_Kamar << endl ;
+        cout << " Nomor Kamar : " << Bk_Temp[Hasil].No_Kamar << endl ;
+        cout << " Status : " << Bk_Temp[Hasil].Status_Sewa << endl ;
 
         system("pause") ;
 
@@ -513,6 +519,7 @@ void Menu_Cari_Nama (Bio_Kos *Bk, int Panjang) {
     if (Panjang == 0) {
         cout << "Data masih kosong" ;
         system("pause") ;
+        return ;
     }
 
     cout << "=================================== " << endl ;
@@ -524,7 +531,7 @@ void Menu_Cari_Nama (Bio_Kos *Bk, int Panjang) {
 
     if (Hasil != -1) {
         system("cls") ;
-        cout << "ID ditemukan !" << endl ;
+        cout << "Nama ditemukan !" << endl ;
         cout << "------------------------------" << endl ;
         cout << " ID : " << Bk[Hasil].ID << endl ;
         cout << " Nama : " << Bk[Hasil].Nama << endl ;
